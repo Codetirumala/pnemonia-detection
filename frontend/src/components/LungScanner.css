@@ -1,0 +1,228 @@
+/* Lung Scanner Animation */
+.lung-scanner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.scanner-container {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  background: linear-gradient(160deg, #1a1f35 0%, #0f1629 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Purple bottom bar */
+.scanner-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #6366f1);
+  opacity: 0.8;
+}
+
+.lung-image {
+  width: 260px;
+  height: 260px;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lung-blue {
+  z-index: 1;
+  animation: fadeBlue 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes fadeBlue {
+  0%, 5% {
+    opacity: 1;
+  }
+  70%, 85% {
+    opacity: 0;
+  }
+  95%, 100% {
+    opacity: 1;
+  }
+}
+
+/* Red lung container with smooth clip animation */
+.scan-reveal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: inset(0 0 100% 0);
+  animation: revealScan 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.lung-red {
+  width: 260px;
+  height: 260px;
+  object-fit: contain;
+  animation: fadeRed 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes fadeRed {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 0.7;
+  }
+  55% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.5;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Smooth Scan Line */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(139, 92, 246, 0.5) 20%, 
+    rgba(139, 92, 246, 1) 50%, 
+    rgba(139, 92, 246, 0.5) 80%, 
+    transparent 100%
+  );
+  z-index: 4;
+  animation: scanLine 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  opacity: 0;
+}
+
+/* Scan line glow area */
+.scan-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 40px;
+  background: linear-gradient(180deg, 
+    rgba(139, 92, 246, 0.25) 0%, 
+    rgba(139, 92, 246, 0.08) 40%,
+    transparent 100%
+  );
+  transform: translateY(0);
+  filter: blur(2px);
+}
+
+/* Animations - Smooth easing */
+@keyframes scanLine {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+    top: 100%;
+  }
+  95%, 100% {
+    opacity: 0;
+    top: 100%;
+  }
+}
+
+@keyframes revealScan {
+  0%, 5% {
+    clip-path: inset(0 0 100% 0);
+  }
+  80% {
+    clip-path: inset(0 0 0% 0);
+  }
+  90%, 100% {
+    clip-path: inset(0 0 0% 0);
+  }
+}
+
+/* Status indicator */
+.scanner-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: #1e293b;
+  border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.status-text {
+  font-size: 14px;
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .scanner-container {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .lung-image {
+    width: 220px;
+    height: 220px;
+  }
+}

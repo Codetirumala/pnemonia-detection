@@ -1,6 +1,7 @@
 import React from 'react';
 import './HeroSection.css';
 import useScrollAnimation from '../hooks/useScrollAnimation';
+import LungScanner from './LungScanner';
 
 function HeroSection({ onGetStarted }) {
   const [contentRef, contentVisible] = useScrollAnimation({ threshold: 0.1 });
@@ -72,34 +73,8 @@ function HeroSection({ onGetStarted }) {
           ref={cardsRef}
         >
           <div className="visual-container">
-            {/* Main Card */}
-            <div className="main-card">
-              <div className="card-header">
-                <div className="card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 6V18M6 12H18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-                  </svg>
-                </div>
-                <span>PneumoScan</span>
-              </div>
-              <div className="card-preview">
-                <div className="xray-placeholder">
-                  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100" height="100" rx="8" fill="#1a1a2e"/>
-                    <ellipse cx="50" cy="45" rx="35" ry="30" stroke="#4a4a6a" strokeWidth="2" fill="none"/>
-                    <ellipse cx="35" cy="45" rx="12" ry="18" stroke="#6366f1" strokeWidth="1.5" fill="rgba(99,102,241,0.1)"/>
-                    <ellipse cx="65" cy="45" rx="12" ry="18" stroke="#6366f1" strokeWidth="1.5" fill="rgba(99,102,241,0.1)"/>
-                    <path d="M50 55 L50 75" stroke="#4a4a6a" strokeWidth="2"/>
-                    <path d="M42 70 L50 75 L58 70" stroke="#4a4a6a" strokeWidth="2" fill="none"/>
-                  </svg>
-                </div>
-                <div className="scan-line"></div>
-              </div>
-              <div className="card-status">
-                <div className="status-dot"></div>
-                Ready to analyze
-              </div>
-            </div>
+            {/* Lung Scanner Animation */}
+            <LungScanner />
             
             {/* Floating Cards */}
             <div className="floating-card card-result">
