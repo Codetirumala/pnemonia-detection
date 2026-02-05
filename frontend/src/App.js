@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
+import HeroSection from './components/HeroSection';
 import UploadSection from './components/UploadSection';
 import ResultsSection from './components/ResultsSection';
 import InfoSection from './components/InfoSection';
@@ -10,6 +11,7 @@ function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [showUpload, setShowUpload] = useState(false);
 
   const handlePrediction = (predictionResult, imageUrl) => {
     setResult(predictionResult);
@@ -20,39 +22,49 @@ function App() {
     setResult(null);
     setUploadedImage(null);
     setLoading(false);
+    setShowUpload(false);
+  };
+
+  const handleGetStarted = () => {
+    setShowUpload(true);
   };
 
   return (
     <div className="App">
       <Header />
       <main className="main-content">
-        <div className="container">
-          {!result ? (
-            <>
-              <div className="hero-section">
-                <h1 className="hero-title">
-                  AI-Powered Pneumonia Detection
-                </h1>
-                <p className="hero-subtitle">
-                  Advanced chest X-ray analysis using deep learning technology
-                  for rapid and accurate pneumonia detection
-                </p>
+        {!result ? (
+          <>
+            {!showUpload ? (
+              <HeroSection onGetStarted={handleGetStarted} />
+            ) : (
+              <div className="container">
+                <div className="upload-page">
+                  <button className="back-button" onClick={() => setShowUpload(false)}>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    Back to Home
+                  </button>
+                  <UploadSection 
+                    onPrediction={handlePrediction}
+                    loading={loading}
+                    setLoading={setLoading}
+                  />
+                </div>
               </div>
-              <UploadSection 
-                onPrediction={handlePrediction}
-                loading={loading}
-                setLoading={setLoading}
-              />
-              <InfoSection />
-            </>
-          ) : (
+            )}
+            <InfoSection />
+          </>
+        ) : (
+          <div className="container">
             <ResultsSection 
               result={result}
               imageUrl={uploadedImage}
               onReset={handleReset}
             />
-          )}
-        </div>
+          </div>
+        )}
       </main>
       <Footer />
     </div>

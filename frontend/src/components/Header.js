@@ -8,19 +8,26 @@ function Header() {
         <div className="logo-section">
           <div className="logo-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/>
+              <path d="M12 6V18M6 12H18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
             </svg>
           </div>
-          <div className="logo-text">
-            <h1 className="logo-title">MediAI</h1>
-            <p className="logo-subtitle">Pneumonia Detection</p>
-          </div>
+          <span className="logo-text">PneumoScan</span>
         </div>
-        <nav className="nav-section">
-          <button className="nav-button">About</button>
-          <button className="nav-button">How it Works</button>
-          <button className="nav-button nav-button-primary">Contact</button>
+        
+        <nav className="nav-menu">
+          <a href="#home" className="nav-link active">Home</a>
+          <a href="#features" className="nav-link">Features</a>
+          <a href="#how-it-works" className="nav-link">How it Works</a>
+          <a href="#faq" className="nav-link">FAQ</a>
+          <a href="#contact" className="nav-link">Contact</a>
         </nav>
+        
+        <button className="header-cta">
+          Try Now
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
       </div>
     </header>
   );

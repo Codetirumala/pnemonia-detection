@@ -1,158 +1,370 @@
+/* Info Section - How It Works - Exact Match Design */
 .info-section {
-  margin: 4rem 0;
+  padding: 100px 0;
+  background: #ffffff;
 }
 
-.info-title {
-  font-size: 2rem;
+.info-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.section-badge {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 42px;
   font-weight: 700;
-  color: #1a365d;
-  text-align: center;
-  margin-bottom: 3rem;
+  color: #111827;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
 }
 
-.info-grid {
+.section-description {
+  font-size: 16px;
+  color: #6b7280;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* How It Works Two Column Layout */
+.how-it-works-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
 }
 
-.info-card {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  text-align: center;
+/* Left Side - Lungs Illustration */
+.how-image-side {
   position: relative;
-  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
 }
 
-.info-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 102, 204, 0.15);
+.how-image-wrapper {
+  position: relative;
 }
 
-.info-number {
+/* Lungs Image */
+.lungs-image {
+  width: 380px;
+  height: 380px;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+/* Lung fills pulse */
+.lung-fill {
+  animation: lungPulse 4s ease-in-out infinite;
+}
+
+@keyframes lungPulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Particles floating */
+.particle {
+  animation: particleFloat 3s ease-in-out infinite;
+}
+
+.p1 { animation-delay: 0s; }
+.p2 { animation-delay: 0.3s; }
+.p3 { animation-delay: 0.6s; }
+.p4 { animation-delay: 0.9s; }
+.p5 { animation-delay: 1.2s; }
+.p6 { animation-delay: 0.15s; }
+.p7 { animation-delay: 0.45s; }
+.p8 { animation-delay: 0.75s; }
+.p9 { animation-delay: 1.05s; }
+.p10 { animation-delay: 1.35s; }
+
+@keyframes particleFloat {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+
+/* Pulse rings */
+.pulse-ring {
   position: absolute;
-  top: -15px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
-  color: white;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(59, 130, 246, 0.3);
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 1.1rem;
+  animation: pulseRing 4s ease-out infinite;
 }
 
-.info-icon {
-  width: 70px;
-  height: 70px;
-  margin: 1rem auto 1.5rem;
-  background: linear-gradient(135deg, #e6f2ff 0%, #cce5ff 100%);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #0066cc;
+.ring1 {
+  width: 200px;
+  height: 200px;
+  animation-delay: 0s;
 }
 
-.info-icon svg {
-  width: 36px;
-  height: 36px;
+.ring2 {
+  width: 260px;
+  height: 260px;
+  animation-delay: 2s;
 }
 
-.info-card-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #1a365d;
-  margin-bottom: 0.75rem;
+@keyframes pulseRing {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0;
+  }
 }
 
-.info-card-description {
-  font-size: 0.95rem;
-  color: #718096;
-  line-height: 1.6;
-}
-
-.features-section {
+/* Floating X-Ray Card */
+.floating-xray-card {
+  position: absolute;
+  bottom: -30px;
+  left: -40px;
   background: white;
-  border-radius: 16px;
-  padding: 2.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.features-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1a365d;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.feature-item {
-  display: flex;
-  align-items: start;
-  gap: 1rem;
-  padding: 1rem;
   border-radius: 12px;
-  transition: all 0.3s ease;
+  padding: 16px 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  min-width: 180px;
+  animation: floatCard 3s ease-in-out infinite;
 }
 
-.feature-item:hover {
-  background: #f8fafc;
-}
-
-.feature-item svg {
-  width: 40px;
-  height: 40px;
-  color: #0066cc;
-  flex-shrink: 0;
-  padding: 8px;
-  background: linear-gradient(135deg, #e6f2ff 0%, #cce5ff 100%);
-  border-radius: 10px;
-}
-
-.feature-item h4 {
-  font-size: 1.1rem;
+.xray-card-header {
+  font-size: 14px;
   font-weight: 600;
-  color: #1a365d;
-  margin-bottom: 0.5rem;
+  color: #111827;
+  margin-bottom: 12px;
 }
 
-.feature-item p {
-  font-size: 0.9rem;
-  color: #718096;
-  line-height: 1.5;
+.xray-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.xray-thumb {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+.xray-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.xray-line {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+.xray-line.short {
+  width: 60%;
+}
+
+@keyframes floatCard {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Floating Upload Button */
+.floating-upload-btn {
+  position: absolute;
+  top: 20px;
+  right: -50px;
+  background: #bbf7d0;
+  color: #166534;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3);
+  animation: floatCard 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.floating-upload-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Right Side - Timeline Steps */
+.how-steps-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timeline-step {
+  display: flex;
+  gap: 24px;
+}
+
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background: rgba(124, 58, 237, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7c3aed;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.step-icon-wrapper::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 24px;
+  background: #7c3aed;
+  border-radius: 2px;
+}
+
+.step-icon-wrapper svg {
+  width: 22px;
+  height: 22px;
+}
+
+.step-line {
+  width: 2px;
+  flex: 1;
+  min-height: 40px;
+  background: #e5e7eb;
+  margin: 8px 0;
+}
+
+.timeline-step:last-child .step-line {
+  display: none;
+}
+
+.step-content {
+  padding-bottom: 40px;
+}
+
+.timeline-step:last-child .step-content {
+  padding-bottom: 0;
+}
+
+.step-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.step-content p {
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .how-it-works-content {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .how-image-side {
+    order: -1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .how-main-image {
+    max-width: 400px;
+  }
+
+  .floating-upload-btn {
+    right: 0;
+  }
 }
 
 @media (max-width: 768px) {
-  .info-title {
-    font-size: 1.6rem;
-    margin-bottom: 2rem;
+  .info-section {
+    padding: 60px 0;
   }
 
-  .info-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .info-container {
+    padding: 0 20px;
   }
 
-  .features-section {
-    padding: 1.5rem;
+  .section-title {
+    font-size: 32px;
   }
 
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .how-it-works-content {
+    gap: 40px;
+  }
+
+  .how-main-image {
+    max-width: 100%;
+  }
+
+  .floating-xray-card {
+    left: 10px;
+    bottom: -10px;
+  }
+
+  .floating-upload-btn {
+    right: 10px;
+    top: 40%;
+  }
+
+  .step-content h3 {
+    font-size: 16px;
+  }
+
+  .step-content p {
+    font-size: 14px;
   }
 }
