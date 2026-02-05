@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
+import API_URL from '../config';
 import './UploadSection.css';
 
 function UploadSection({ onPrediction, loading, setLoading }) {
@@ -55,7 +56,7 @@ function UploadSection({ onPrediction, loading, setLoading }) {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await axios.post('/api/predict', formData, {
+      const response = await axios.post(`${API_URL}/api/predict`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
