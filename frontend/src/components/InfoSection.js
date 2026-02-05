@@ -1,13 +1,21 @@
 import React from 'react';
 import './InfoSection.css';
 import lungImage from './assets/lung.png';
+import useScrollAnimation from '../hooks/useScrollAnimation';
 
 function InfoSection() {
+  const [headerRef, headerVisible] = useScrollAnimation({ threshold: 0.2 });
+  const [imageRef, imageVisible] = useScrollAnimation({ threshold: 0.2 });
+  const [stepsRef, stepsVisible] = useScrollAnimation({ threshold: 0.1 });
+
   return (
     <section className="info-section" id="how-it-works">
       <div className="info-container">
         {/* Section Header */}
-        <div className="section-header">
+        <div 
+          className={`section-header scroll-animate fade-up ${headerVisible ? 'visible' : ''}`}
+          ref={headerRef}
+        >
           
           <h2 className="section-title">How it works</h2>
           <p className="section-description">
@@ -18,7 +26,10 @@ function InfoSection() {
         {/* How It Works Content - Two Column Layout */}
         <div className="how-it-works-content">
           {/* Left Side - Lungs Image */}
-          <div className="how-image-side">
+          <div 
+            className={`how-image-side scroll-animate scale-up ${imageVisible ? 'visible' : ''}`}
+            ref={imageRef}
+          >
             <img 
               src={lungImage} 
               alt="Lungs illustration" 
@@ -27,7 +38,10 @@ function InfoSection() {
           </div>
 
           {/* Right Side - Steps Timeline */}
-          <div className="how-steps-side">
+          <div 
+            className={`how-steps-side scroll-animate fade-right ${stepsVisible ? 'visible' : ''}`}
+            ref={stepsRef}
+          >
             <div className="timeline-step">
               <div className="step-indicator">
                 <div className="step-icon-wrapper">

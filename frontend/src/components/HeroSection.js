@@ -1,7 +1,11 @@
 import React from 'react';
 import './HeroSection.css';
+import useScrollAnimation from '../hooks/useScrollAnimation';
 
 function HeroSection({ onGetStarted }) {
+  const [contentRef, contentVisible] = useScrollAnimation({ threshold: 0.1 });
+  const [cardsRef, cardsVisible] = useScrollAnimation({ threshold: 0.1 });
+
   return (
     <section className="hero">
       <div className="hero-background">
@@ -9,7 +13,10 @@ function HeroSection({ onGetStarted }) {
       </div>
       
       <div className="hero-container">
-        <div className="hero-content">
+        <div 
+          className={`hero-content scroll-animate fade-left ${contentVisible ? 'visible' : ''}`}
+          ref={contentRef}
+        >
           <div className="hero-badge">
             <span className="badge-dot"></span>
             AI-Powered Diagnostic Tool
@@ -60,7 +67,10 @@ function HeroSection({ onGetStarted }) {
           </div>
         </div>
         
-        <div className="hero-visual">
+        <div 
+          className={`hero-visual scroll-animate fade-right delay-200 ${cardsVisible ? 'visible' : ''}`}
+          ref={cardsRef}
+        >
           <div className="visual-container">
             {/* Main Card */}
             <div className="main-card">

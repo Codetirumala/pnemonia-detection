@@ -16,9 +16,9 @@ function Header() {
         
         <nav className="nav-menu">
           <a href="#home" className="nav-link active">Home</a>
-          <a href="#features" className="nav-link">Features</a>
+          <a href="#about" className="nav-link">About Us</a>
           <a href="#how-it-works" className="nav-link">How it Works</a>
-          <a href="#faq" className="nav-link">FAQ</a>
+          <a href="#features" className="nav-link">Features</a>
           <a href="#contact" className="nav-link">Contact</a>
         </nav>
         

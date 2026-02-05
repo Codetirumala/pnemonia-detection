@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --primary: #7c3aed;
   --primary-dark: #6d28d9;
@@ -109,6 +113,100 @@ body {
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto;
+  animation: spin 1s linear infinite;
 }
+
+/* ===== SCROLL ANIMATION EFFECTS ===== */
+
+/* Base state - hidden */
+.scroll-animate {
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Visible state */
+.scroll-animate.visible {
+  opacity: 1;
+}
+
+/* Fade Up Effect */
+.fade-up {
+  transform: translateY(60px);
+}
+.fade-up.visible {
+  transform: translateY(0);
+}
+
+/* Fade Down Effect */
+.fade-down {
+  transform: translateY(-60px);
+}
+.fade-down.visible {
+  transform: translateY(0);
+}
+
+/* Fade Left Effect */
+.fade-left {
+  transform: translateX(-60px);
+}
+.fade-left.visible {
+  transform: translateX(0);
+}
+
+/* Fade Right Effect */
+.fade-right {
+  transform: translateX(60px);
+}
+.fade-right.visible {
+  transform: translateX(0);
+}
+
+/* Scale Up Effect */
+.scale-up {
+  transform: scale(0.8);
+}
+.scale-up.visible {
+  transform: scale(1);
+}
+
+/* Zoom In Effect */
+.zoom-in {
+  transform: scale(0.5);
+}
+.zoom-in.visible {
+  transform: scale(1);
+}
+
+/* Flip Effect */
+.flip-up {
+  transform: perspective(1000px) rotateX(20deg) translateY(40px);
+}
+.flip-up.visible {
+  transform: perspective(1000px) rotateX(0) translateY(0);
+}
+
+/* Blur In Effect */
+.blur-in {
+  filter: blur(10px);
+  transform: translateY(30px);
+}
+.blur-in.visible {
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* Stagger delay classes */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+.delay-600 { transition-delay: 0.6s; }
+
+/* Duration variations */
+.duration-fast { transition-duration: 0.5s; }
+.duration-slow { transition-duration: 1.2s; }
+
+/* Easing variations */
+.ease-bounce { transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+.ease-smooth { transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); }

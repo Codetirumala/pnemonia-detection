@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
+import AboutSection from './components/AboutSection';
 import UploadSection from './components/UploadSection';
 import ResultsSection from './components/ResultsSection';
 import InfoSection from './components/InfoSection';
+import FeaturesSection from './components/FeaturesSection';
+import TestimonialsSection from './components/TestimonialsSection';
+import ContactSection from './components/ContactSection';
+import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
 
 function App() {
@@ -36,7 +41,10 @@ function App() {
         {!result ? (
           <>
             {!showUpload ? (
-              <HeroSection onGetStarted={handleGetStarted} />
+              <>
+                <HeroSection onGetStarted={handleGetStarted} />
+                <AboutSection />
+              </>
             ) : (
               <div className="container">
                 <div className="upload-page">
@@ -55,6 +63,9 @@ function App() {
               </div>
             )}
             <InfoSection />
+            <FeaturesSection />
+            <TestimonialsSection />
+            <ContactSection />
           </>
         ) : (
           <div className="container">
@@ -67,6 +78,7 @@ function App() {
         )}
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
