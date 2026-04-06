@@ -108,9 +108,11 @@ def predict():
         is_pneumonia_file = 'PNEUMONIA' in filename_upper or 'VIRUS' in filename_upper or 'BACTERIA' in filename_upper
         is_normal_file = 'NORMAL' in filename_upper
 
+        grad_cam_image = None
         if is_pneumonia_file:
             prediction_label = 'Pneumonia'
             confidence = np.random.uniform(0.85, 0.98)
+            grad_cam_image = generate_grad_cam_image(original_img_array, processed_img)
         elif is_normal_file:
             prediction_label = 'Normal'
             confidence = np.random.uniform(0.90, 0.99)
@@ -120,11 +122,11 @@ def predict():
                 prediction = model.predict(processed_img)[0][0]
                 prediction_label = 'Pneumonia' if prediction > 0.5 else 'Normal'
                 confidence = float(prediction) if prediction > 0.5 else 1 - float(prediction)
+                if prediction_label == 'Pneumonia':
+                    grad_cam_image = generate_grad_cam_image(original_img_array, processed_img)
             else:
                 prediction_label = 'Error'
                 confidence = 0.0
-
-        grad_cam_image = generate_grad_cam_image(original_img_array, processed_img)
         
         return jsonify({
             'prediction': prediction_label,
