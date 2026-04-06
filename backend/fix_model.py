@@ -36,14 +36,30 @@ try:
             # Function to fix layer configs recursively
             def fix_layer_config(layer_config):
                 if isinstance(layer_config, dict):
-                    # Fix InputLayer batch_shape -> shape
+                    # Fix InputLayer: remove 'shape' if it exists
                     if layer_config.get('class_name') == 'InputLayer':
-                        if 'batch_shape' in layer_config.get('config', {}):
-                            batch_shape = layer_config['config'].pop('batch_shape')
-                            if batch_shape and len(batch_shape) > 1:
-                                layer_config['config']['shape'] = batch_shape[1:]
-                            print(f"    Fixed InputLayer: batch_shape -> shape")
+                        if 'config' in layer_config and 'shape' in layer_config['config']:
+                            del layer_config['config']['shape']
+                            print(f"    Fixed InputLayer: removed 'shape' argument")
                     
+                    # Remove dtype from config
+                    if 'config' in layer_config and 'dtype' in layer_config['config']:
+                        del layer_config['config']['dtype']
+                        print(f"    Fixed {layer_config.get('class_name')}: removed 'dtype' argument")
+
+                    # Fix LayerNormalization: remove 'rms_scaling' if it exists
+                    if layer_config.get('class_name') == 'LayerNormalization':
+                        if 'config' in layer_config and 'rms_scaling' in layer_config['config']:
+                            del layer_config['config']['rms_scaling']
+                            print(f"    Fixed LayerNormalization: removed 'rms_scaling' argument")
+                    
+                    # Fix MultiHeadAttention: remove 'query_shape', 'key_shape', 'value_shape' if it exists
+                    if layer_config.get('class_name') == 'MultiHeadAttention':
+                        for shape_key in ['query_shape', 'key_shape', 'value_shape']:
+                            if 'config' in layer_config and shape_key in layer_config['config']:
+                                del layer_config['config'][shape_key]
+                                print(f"    Fixed MultiHeadAttention: removed '{shape_key}' argument")
+
                     # Recursively fix nested structures
                     for key, value in layer_config.items():
                         if isinstance(value, dict):

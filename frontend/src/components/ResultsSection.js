@@ -2,7 +2,7 @@ import React from 'react';
 import './ResultsSection.css';
 
 function ResultsSection({ result, imageUrl, onReset }) {
-  const isPneumonia = result.diagnosis === 'PNEUMONIA';
+  const isPneumonia = result.prediction === 'Pneumonia';
   
   return (
     <div className="results-section">
@@ -19,11 +19,25 @@ function ResultsSection({ result, imageUrl, onReset }) {
       <div className="results-grid">
         <div className="image-container">
           <div className="image-wrapper">
-            <img src={imageUrl} alt="Analyzed X-ray" className="xray-image" />
+            <img src={imageUrl} alt="Original X-ray" className="xray-image" />
+            <div className="image-label">Original Image</div>
           </div>
         </div>
 
-        <div className="diagnosis-container">
+        <div className="image-container">
+          <div className="image-wrapper">
+            {result.grad_cam_image && (
+              <img 
+                src={`data:image/jpeg;base64,${result.grad_cam_image}`} 
+                alt="Grad-CAM Heatmap" 
+                className="xray-image" 
+              />
+            )}
+            <div className="image-label">Grad-CAM Heatmap</div>
+          </div>
+        </div>
+
+        <div className="diagnosis-container full-width">
           <div className={`diagnosis-badge ${isPneumonia ? 'pneumonia' : 'normal'}`}>
             <div className="badge-icon">
               {isPneumonia ? (
@@ -38,48 +52,20 @@ function ResultsSection({ result, imageUrl, onReset }) {
             </div>
             <div className="badge-text">
               <span className="badge-label">Diagnosis</span>
-              <h3 className="badge-diagnosis">{result.diagnosis}</h3>
+              <h3 className="badge-diagnosis">{result.prediction}</h3>
             </div>
           </div>
 
           <div className="confidence-section">
             <div className="confidence-header">
               <span className="confidence-label">Confidence Level</span>
-              <span className="confidence-value">{result.confidence}%</span>
+              <span className="confidence-value">{result.confidence}</span>
             </div>
             <div className="confidence-bar">
               <div 
                 className={`confidence-fill ${isPneumonia ? 'pneumonia' : 'normal'}`}
-                style={{ width: `${result.confidence}%` }}
+                style={{ width: result.confidence }}
               ></div>
-            </div>
-          </div>
-
-          <div className="details-section">
-            <h4 className="details-title">Detailed Analysis</h4>
-            <div className="details-grid">
-              <div className="detail-card">
-                <div className="detail-icon pneumonia-icon">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 6V12M12 12V18M12 12H18M12 12H6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
-                </div>
-                <div className="detail-content">
-                  <span className="detail-label">Pneumonia</span>
-                  <span className="detail-value">{result.details.pneumonia_probability}%</span>
-                </div>
-              </div>
-              <div className="detail-card">
-                <div className="detail-icon normal-icon">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <div className="detail-content">
-                  <span className="detail-label">Normal</span>
-                  <span className="detail-value">{result.details.normal_probability}%</span>
-                </div>
-              </div>
             </div>
           </div>
 

@@ -48,9 +48,33 @@
 
 .results-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 32px;
+  grid-template-areas:
+    "image1 image2"
+    "diagnosis diagnosis";
 }
+
+.image-container:nth-child(1) {
+  grid-area: image1;
+}
+
+.image-container:nth-child(2) {
+  grid-area: image2;
+}
+
+.diagnosis-container.full-width {
+  grid-area: diagnosis;
+}
+
+.image-label {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4b5563;
+}
+
 
 .image-container {
   background: white;
